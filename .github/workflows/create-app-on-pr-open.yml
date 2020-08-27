@@ -7,6 +7,11 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
+        path: themenamehere
+      - uses: actions/checkout@v2
+        repository: SNathJr/ghost-on-heroku
+        ref: 2b9802b
+        path: ghost-on-heroku
       - uses: igordcsouza/github-action-get-branch-name@ecf5862
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -21,3 +26,18 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku create ghostprev-${PR_BRANCH_NAME}
+      - name: mv theme
+        run: mv themenamehere ghost-on-heroku/content/themes
+      - name: hack .gitignore
+        run: grep -v content/themes/\* ghost-on-heroku/.gitignore > ghost-on-heroku/.gitignore
+      - name: install Heroku SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.HEROKU_SSH_KEY }}
+          known_hosts: ${{ secrets.HEROKU_KNOWN_HOSTS }}
+      - name: add heroku remote
+        working_directory: ghost-on-heroku
+        run: git remote add heroku https://git.heroku.com/ghostprev-${PR_BRANCH_NAME}.git
+      - name: push to heroku
+        working_directory: ghost-on-heroku
+        run: git push heroku master

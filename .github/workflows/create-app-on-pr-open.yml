@@ -34,7 +34,7 @@ jobs:
           heroku config:get JAWSDB_URL -a ghostprev-$PR_BRANCH_NAME > pr.url
           node -e 'const u = new URL(process.argv[1]); console.log(`mysqldump -h ${u.hostname} -u ${u.username} -p${u.password} ${u.pathname.substring(1)} --set-gtid-purged=OFF`)' `cat base.url` > dump.sh
           bash dump.sh > base.sql
-          sed -i 's/casper/themenamehere' base.sql
+          sed -i 's/casper/themenamehere/' base.sql
           node -e 'const u = new URL(process.argv[1]); console.log(`mysql -h ${u.hostname} -u ${u.username} -p${u.password} ${u.pathname.substring(1)}`)' `cat pr.url` > import.sh
           bash import.sh < base.sql
           echo "done?"

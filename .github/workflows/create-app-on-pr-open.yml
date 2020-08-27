@@ -63,9 +63,15 @@ jobs:
       - name: push to heroku
         working-directory: ghost-on-heroku
         run: git push -f heroku master
-      - uses: LouisBrunner/checks-action@v0.1.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          name: Preview deployment
-          conclusion: success
-          action_url: https://example.com
+      - name: add URL check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          curl \
+            -X POST \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.antiope-preview+json" \
+            https://api.github.com/repos/$REPOSITORY/check-runs \
+            -d '{"name":"preview URL","head_sha":"$HEAD_SHA","details_url":"https://ghostprev-$PR_BRANCH_NAME.herokuapp.com","status":"completed","conclusion":"success"}'

@@ -33,22 +33,33 @@
     {{ghost_head}}
 </head>
 
-<body class="{{body_class}} {{#is "blog"}}blog-template{{/is}}">
+<body class="{{body_class}}">
+
 
     {{> nav}}
+
+        
+    <div class="hero">
+            <div data-aos="fade-up" class="text-heading contact-margin">
+            {{!-- <img class="hero-logo" src="{{asset "images/logo.png"}}"> --}}
+            <h2>Contact Us</h2>
+
+            <div data-aos="fade-up" class="hero-social-media" style="margin-bottom: 50px">
+
+            <a href="https://www.facebook.com/wpgpoliceharm/" target="_blank"> <img class="hvr-float"  src="{{asset "images/facebook.png"}}" width="50" height="50"> </a>
+            <a href="https://www.instagram.com/wpgpoliceharm/" target="_blank"> <img class="hvr-float"  src="{{asset "images/instagram.png"}}" width="50" height="50"> </a>
+            <a href="https://twitter.com/WpgPoliceHarm" target="_blank"> <img class="hvr-float"  src="{{asset "images/twitter.png"}}" width="50" height="50"> </a>
+
+<a data-aos="fade-up" href="mailto:wpgpolicecauseharm@gmail.com"> <p class="email ">wpgpolicecauseharm@gmail.com</p> </a>
+            </div>
+
+
             
             <!--<section><h3>Recent posts from the blog</h3><ul><li> <a href="/blog/the-most-recent-post-so-far">The most recent post so far</a></li><li> <a href="/blog/a-simple-post">A simple blog post</a></li><li> <a href="/blog/another-post">Another post</a></li></ul></section>-->
-        
-
-    {{!-- End Navbar --}}
-
-    {{!-- All the main content gets inserted here, index.hbs, post.hbs, etc --}}
-    <div class="section-1" style="margin-bottom:0px">
-{{!--     <div class="text-heading" style="margin-top: 100px" > <h2>BLOG</h2></div>
- --}}    {{{body}}}
-
+        </div>
     </div>
-    {{!-- <footer>
+
+        <footer>
             <div class="footer-items">
             <h2 class="footer-defund-the-police">DEFUND THE POLICE.</h2>
  
@@ -56,13 +67,17 @@
 <hr>
 
             <div class="hero-social-media">
-            <img  src="{{asset "images/facebook.png"}}" width="50" height="50">
-            <img  src="{{asset "images/instagram.png"}}" height="50">
-            <img  src="{{asset "images/twitter.png"}}" height="50">
+            <a href="https://www.facebook.com/wpgpoliceharm/" target="_blank"> <img class="hvr-float"  src="{{asset "images/facebook.png"}}" width="50" height="50"> </a>
+            <a href="https://www.instagram.com/wpgpoliceharm/" target="_blank"> <img class="hvr-float"  src="{{asset "images/instagram.png"}}" height="50"> </a>
+            <a href="https://twitter.com/WpgPoliceHarm" target="_blank"> <img class="hvr-float"  src="{{asset "images/twitter.png"}}" height="50"> </a>
 
             </div>
             </div>
-        </footer> --}}
+        </footer>
+    {{!-- End Navbar --}}
+
+    {{!-- All the main content gets inserted here, index.hbs, post.hbs, etc --}}
+    {{!-- {{{body}}} --}}
 
     {{!-- Footer content goes here --}}
     {{!-- <div class="card">
@@ -82,7 +97,8 @@
     <script src="{{asset "js/bootstrap.min.js"}}"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
-    AOS.init();
+    AOS.init( {once: true}
+    );
   </script>
 </body>
 

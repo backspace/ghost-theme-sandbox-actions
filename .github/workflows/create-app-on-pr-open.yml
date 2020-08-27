@@ -38,8 +38,8 @@ jobs:
           key: ${{ secrets.HEROKU_SSH_KEY }}
           known_hosts: ${{ secrets.HEROKU_KNOWN_HOSTS }}
       - name: add heroku remote
-        working_directory: ghost-on-heroku
+        working-directory: ghost-on-heroku
         run: git remote add heroku https://git.heroku.com/ghostprev-${PR_BRANCH_NAME}.git
       - name: push to heroku
-        working_directory: ghost-on-heroku
+        working-directory: ghost-on-heroku
         run: git push heroku master

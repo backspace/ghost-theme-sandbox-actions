@@ -32,8 +32,10 @@ jobs:
         run: |
           heroku config:get JAWSDB_URL -a ghost-theme-sandbox-base > base.url
           heroku config:get JAWSDB_URL -a ghostprev-$PR_BRANCH_NAME > pr.url
-          node -e 'const u = new URL(process.argv[1]); console.log(`mysqldump -h ${u.hostname} -u ${u.username} -p${u.password} ${u.pathname.substring(1)} --set-gtid-purged=OFF`)' `cat base.url` > base.sql
-          node -e 'const u = new URL(process.argv[1]); console.log(`mysql -h ${u.hostname} -u ${u.username} -p${u.password} ${u.pathname.substring(1)}`)' `cat pr.url` < base.sql
+          node -e 'const u = new URL(process.argv[1]); console.log(`mysqldump -h ${u.hostname} -u ${u.username} -p${u.password} ${u.pathname.substring(1)} --set-gtid-purged=OFF`)' `cat base.url` > dump.sh
+          bash dump.sh > base.sql
+          node -e 'const u = new URL(process.argv[1]); console.log(`mysql -h ${u.hostname} -u ${u.username} -p${u.password} ${u.pathname.substring(1)}`)' `cat pr.url` > import.sh
+          bash import.sh < base.sql
           echo "done?"
           heroku config:set APP_PUBLIC_URL=https://ghostprev-$PR_BRANCH_NAME.herokuapp.com -a ghostprev-$PR_BRANCH_NAME
       - name: degit theme
@@ -65,3 +67,4 @@ jobs:
           path: |
             *.url
             base.sql
+            *.sh

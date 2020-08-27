@@ -74,4 +74,4 @@ jobs:
             -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/$REPOSITORY/statuses/$HEAD_SHA \
-            -d '{"description":"preview URL","target_url":"https://ghostprev-'"$PR_BRANCH_NAME"'.herokuapp.com","state":"success"}'
+            -d '{"context":"Preview","description":"Ghost deployment with this theme","target_url":"https://ghostprev-'"$PR_BRANCH_NAME"'.herokuapp.com","state":"success"}'

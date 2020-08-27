@@ -24,10 +24,12 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku whoami
-      - name: create application
+      - name: install fork plugin
+        run: heroku plugins:install heroku-fork
+      - name: create forked application
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku create ghostprev-${PR_BRANCH_NAME} --ssh-git
+        run: heroku fork --from heroku plugins:install heroku-fork --to ghostprev-${PR_BRANCH_NAME}
       - name: mv theme
         run: mv themenamehere ghost-on-heroku/content/themes
       - name: hack .gitignore
@@ -43,4 +45,4 @@ jobs:
         run: git remote add heroku git@heroku.com:ghostprev-${PR_BRANCH_NAME}.git
       - name: push to heroku
         working-directory: ghost-on-heroku
-        run: git push heroku master -v -v -v
+        run: git push -f heroku master

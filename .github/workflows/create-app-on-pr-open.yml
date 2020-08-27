@@ -4,18 +4,6 @@ jobs:
   deploy:
     runs-on: ubuntu-18.04
     steps:
-      - name: add preview generation check
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPOSITORY: ${{ github.repository }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-        run: |
-          curl \
-            -X POST \
-            -H "Authorization: token $GITHUB_TOKEN" \
-            -H "Accept: application/vnd.github.antiope-preview+json" \
-            https://api.github.com/repos/$REPOSITORY/check-runs \
-            -d '{"name":"preview URL","head_sha":"'"$HEAD_SHA"'","status":"in_progress"}'
       - uses: actions/checkout@v2
         with:
           path: themenamehere

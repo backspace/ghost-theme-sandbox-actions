@@ -1,7 +1,5 @@
-name: Create Heroku app on PR open
-on:
-  pull_request:
-    types: [opened]
+name: Create Heroku app on PR open, update on push…?
+on: pull_request
 jobs:
   deploy:
     runs-on: ubuntu-18.04
@@ -22,10 +20,12 @@ jobs:
       - run: echo "app name would be ghostprev-${PR_BRANCH_NAME}"
       - name: install fork plugin
         run: heroku plugins:install heroku-fork
+        if: ${{ github.event.action == 'open' }}
       - name: create forked application
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku fork --from ghost-theme-sandbox-base --to ghostprev-${PR_BRANCH_NAME}
+        if: ${{ github.event.action == 'open' }}
       - name: replace database and set URL
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
@@ -39,6 +39,7 @@ jobs:
           bash import.sh < base.sql
           echo "done?"
           heroku config:set APP_PUBLIC_URL=https://ghostprev-$PR_BRANCH_NAME.herokuapp.com -a ghostprev-$PR_BRANCH_NAME
+        if: ${{ github.event.action == 'open' }}
       - name: degit theme
         run: rm -rf themenamehere/.git
       - name: mv theme

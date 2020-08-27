@@ -42,4 +42,4 @@ jobs:
         run: git remote add heroku git@heroku.com:ghostprev-${PR_BRANCH_NAME}.git
       - name: push to heroku
         working-directory: ghost-on-heroku
-        run: git push heroku master
+        run: git push heroku master -v -v -v

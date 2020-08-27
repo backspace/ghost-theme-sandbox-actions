@@ -36,7 +36,6 @@ jobs:
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.HEROKU_SSH_KEY }}
-          known_hosts: ${{ secrets.HEROKU_KNOWN_HOSTS }}
       - name: add heroku remote
         working-directory: ghost-on-heroku
         run: git remote add heroku git@heroku.com:ghostprev-${PR_BRANCH_NAME}.git

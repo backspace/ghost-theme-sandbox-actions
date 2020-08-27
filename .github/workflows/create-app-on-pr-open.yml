@@ -30,7 +30,8 @@ jobs:
       - name: mv theme
         run: mv themenamehere ghost-on-heroku/content/themes
       - name: hack .gitignore
-        run: grep -v content/themes/\* ghost-on-heroku/.gitignore > ghost-on-heroku/.gitignore
+        working-directory: ghost-on-heroku
+        run: sed -i 's/content\/themes\/\*//' .gitignore
       - name: install Heroku SSH key
         uses: shimataro/ssh-key-action@v2
         with:

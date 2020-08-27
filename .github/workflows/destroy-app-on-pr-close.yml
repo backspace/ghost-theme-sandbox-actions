@@ -1,4 +1,4 @@
-name: Destroy Heroku app on PR open
+name: Destroy Heroku app on PR close
 on:
   pull_request:
     types: [closed]

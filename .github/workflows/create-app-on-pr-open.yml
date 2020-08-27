@@ -29,7 +29,7 @@ jobs:
       - name: create forked application
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku fork --from heroku plugins:install heroku-fork --to ghostprev-${PR_BRANCH_NAME}
+        run: heroku fork --from ghost-theme-sandbox-base --to ghostprev-${PR_BRANCH_NAME}
       - name: mv theme
         run: mv themenamehere ghost-on-heroku/content/themes
       - name: hack .gitignore

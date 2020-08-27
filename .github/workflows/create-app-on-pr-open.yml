@@ -7,11 +7,13 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-        path: themenamehere
+        with:
+          path: themenamehere
       - uses: actions/checkout@v2
-        repository: SNathJr/ghost-on-heroku
-        ref: 2b9802b
-        path: ghost-on-heroku
+        with:
+          repository: SNathJr/ghost-on-heroku
+          ref: 2b9802b
+          path: ghost-on-heroku
       - uses: igordcsouza/github-action-get-branch-name@ecf5862
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -30,6 +30,8 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku fork --from ghost-theme-sandbox-base --to ghostprev-${PR_BRANCH_NAME}
+      - name: degit theme
+        run: rm -rf themenamehere/.git
       - name: mv theme
         run: mv themenamehere ghost-on-heroku/content/themes
       - name: hack .gitignore

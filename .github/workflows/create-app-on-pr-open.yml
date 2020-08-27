@@ -62,10 +62,3 @@ jobs:
       - name: push to heroku
         working-directory: ghost-on-heroku
         run: git push -f heroku master
-      # - uses: actions/upload-artifact@v2
-      #   with:
-      #     name: things
-      #     path: |
-      #       *.url
-      #       base.sql
-      #       *.sh

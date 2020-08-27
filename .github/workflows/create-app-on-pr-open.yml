@@ -39,7 +39,7 @@ jobs:
           node -e 'const u = new URL(process.argv[1]); console.log(`mysqldump -h ${u.hostname} -u ${u.username} -p${u.password} ${u.pathname.substring(1)} --set-gtid-purged=OFF`)' `cat base.url` > base.sql
           node -e 'const u = new URL(process.argv[1]); console.log(`mysql -h ${u.hostname} -u ${u.username} -p${u.password} ${u.pathname.substring(1)}`)' `cat pr.url` < base.sql
           echo "done?"
-          heroku config:set APP_PUBLIC_URL=https://ghostprev-$PR_BRANCH_NAME.herokuapp.com
+          heroku config:set APP_PUBLIC_URL=https://ghostprev-$PR_BRANCH_NAME.herokuapp.com -a ghostprev-$PR_BRANCH_NAME
       - name: degit theme
         run: rm -rf themenamehere/.git
       - name: mv theme

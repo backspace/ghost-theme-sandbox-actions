@@ -38,6 +38,7 @@ jobs:
           heroku config:get JAWSDB_URL -a ghostprev-$PR_BRANCH_NAME > pr.url
           node -e 'const u = new URL(process.argv[1]); console.log(`mysqldump -h ${u.hostname} -u ${u.username} -p${u.password} ${u.pathname.substring(1)}`)' `cat base.url` > base.sql
           node -e 'const u = new URL(process.argv[1]); console.log(`mysqldump -h ${u.hostname} -u ${u.username} -p${u.password} ${u.pathname.substring(1)}`)' `cat pr.url` < base.sql
+          echo "done?"
       - name: degit theme
         run: rm -rf themenamehere/.git
       - name: mv theme

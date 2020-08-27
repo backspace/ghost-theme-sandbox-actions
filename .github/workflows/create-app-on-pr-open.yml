@@ -63,3 +63,9 @@ jobs:
       - name: push to heroku
         working-directory: ghost-on-heroku
         run: git push -f heroku master
+      - uses: LouisBrunner/checks-action@v0.1.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: Preview deployment
+          conclusion: success
+          action_url: https://example.com

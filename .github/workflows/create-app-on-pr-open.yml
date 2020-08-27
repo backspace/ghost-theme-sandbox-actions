@@ -74,4 +74,4 @@ jobs:
             -H "Authorization: token $GITHUB_TOKEN" \
             -H "Accept: application/vnd.github.antiope-preview+json" \
             https://api.github.com/repos/$REPOSITORY/check-runs \
-            -d '{"name":"preview URL","head_sha":"$HEAD_SHA","details_url":"https://ghostprev-$PR_BRANCH_NAME.herokuapp.com","status":"completed","conclusion":"success"}'
+            -d '{"name":"preview URL","head_sha":"'"$HEAD_SHA"'","details_url":"https://ghostprev-'"$PR_BRANCH_NAME"'.herokuapp.com","status":"completed","conclusion":"success"}'

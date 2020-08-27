@@ -43,6 +43,9 @@ jobs:
       - name: add heroku remote
         working-directory: ghost-on-heroku
         run: git remote add heroku git@heroku.com:ghostprev-${PR_BRANCH_NAME}.git
+      - name: add and commit changes
+        working-directory: ghost-on-heroku
+        run: git add -A && git commit -m"Add theme"
       - name: push to heroku
         working-directory: ghost-on-heroku
         run: git push -f heroku master

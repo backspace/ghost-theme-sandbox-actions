@@ -43,6 +43,8 @@ jobs:
       - name: add heroku remote
         working-directory: ghost-on-heroku
         run: git remote add heroku git@heroku.com:ghostprev-${PR_BRANCH_NAME}.git
+      - name: configure git
+        run: git config --global user.email "bot@chromatin.ca" && git config --global user.name "Chromatin Bot"
       - name: add and commit changes
         working-directory: ghost-on-heroku
         run: git add -A && git commit -m"Add theme"

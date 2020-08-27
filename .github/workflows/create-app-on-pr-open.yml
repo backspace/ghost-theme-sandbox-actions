@@ -12,7 +12,6 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: SNathJr/ghost-on-heroku
-          ref: 2b9802b
           path: ghost-on-heroku
       - uses: igordcsouza/github-action-get-branch-name@ecf5862
         env:
